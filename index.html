@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- 検索エンジンに載せないための指定（叩き台のため。本番公開時は削除する） -->
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<meta name="bingbot" content="noindex, nofollow, noarchive, nosnippet, noimageindex">
+<title>株式会社SEIKA consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0d0d0d;
+  --white:#ffffff;
+  --gray:#5a5a5a;
+  --line:#d8d8d8;
+  --line-dark:rgba(255,255,255,.2);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:"Zen Kaku Gothic New","Inter",sans-serif;
+  color:var(--black);
+  background:#fff;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none;}
+img{display:block;max-width:100%;}
+
+.logo-font{font-family:"Cormorant Garamond",serif;font-weight:500;letter-spacing:.18em;text-transform:uppercase;}
+
+/* ===== ヘッダー ===== */
+.site-header{
+  position:fixed;top:0;left:0;right:0;
+  height:80px;
+  display:flex;align-items:center;justify-content:center;
+  z-index:100;
+  padding:0 20px;
+  transition:background .3s ease;
+}
+.site-header .logo{
+  font-size:22px;
+  color:#fff;
+  transition:color .3s ease;
+}
+.site-header.is-dark{
+  background:rgba(255,255,255,.94);
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.site-header.is-dark .logo{color:var(--black);}
+.header-burger{
+  position:absolute;left:20px;top:50%;transform:translateY(-50%);
+  width:32px;height:20px;
+  cursor:pointer;
+  background:none;border:none;padding:0;
+}
+.header-burger span{
+  display:block;width:100%;height:1px;background:#fff;
+  transition:background .3s ease;
+}
+.header-burger span:nth-child(2){margin:8px 0;}
+.site-header.is-dark .header-burger span{background:var(--black);}
+
+/* ===== ハンバーガーメニュー ===== */
+.menu-overlay{
+  position:fixed;inset:0;
+  background:var(--black);
+  z-index:200;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:36px;
+  opacity:0;visibility:hidden;
+  transition:opacity .4s ease,visibility .4s ease;
+}
+.menu-overlay.is-open{opacity:1;visibility:visible;}
+.menu-overlay a{
+  font-size:clamp(24px,4vw,36px);
+  color:#fff;
+  font-weight:500;
+  position:relative;
+}
+.menu-close{
+  position:absolute;top:28px;right:28px;
+  width:32px;height:32px;
+  background:none;border:none;cursor:pointer;
+}
+.menu-close svg{width:100%;height:100%;}
+
+/* ===== コンテナ ===== */
+.wrap{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 40px;
+}
+@media (max-width:768px){
+  .wrap{padding:0 20px;}
+}
+
+/* ===== ヒーロー ===== */
+.hero{
+  position:relative;
+  height:100vh;
+  min-height:600px;
+  color:#fff;
+  display:flex;
+  align-items:flex-end;
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:url("img/hero-tokyo.jpg") center/cover no-repeat;
+}
+.hero-bg::after{
+  content:"";
+  position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.15) 0%,rgba(0,0,0,.15) 40%,rgba(0,0,0,.55) 100%);
+}
+.hero-inner{
+  position:relative;
+  width:100%;
+  padding:0 40px 72px;
+}
+.hero h1{
+  font-size:clamp(30px,5.4vw,56px);
+  font-weight:400;
+  letter-spacing:-0.025em;
+  line-height:1.25;
+  color:#fff;
+  margin-bottom:32px;
+}
+.hero-links{
+  display:flex;
+  flex-wrap:wrap;
+  gap:32px;
+}
+.link-arrow{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  font-size:16px;
+  border-bottom:1px solid currentColor;
+  padding-bottom:4px;
+}
+.link-arrow svg{
+  width:16px;height:16px;
+  transition:transform .25s ease;
+  flex-shrink:0;
+}
+.link-arrow:hover svg{transform:translateX(4px);}
+
+@media (max-width:768px){
+  .hero{height:100svh;}
+  .hero-inner{padding:0 20px 40px;}
+  .hero-links{
+    display:grid;
+    grid-template-columns:repeat(2,auto);
+    justify-content:start;
+    gap:16px 24px;
+  }
+}
+
+/* ===== 黒帯イントロ ===== */
+.intro{
+  background:var(--black);
+  color:#fff;
+  padding:120px 0;
+}
+.intro p{
+  font-size:clamp(17px,1.9vw,22px);
+  line-height:1.85;
+  max-width:1000px;
+}
+@media (max-width:768px){
+  .intro{padding:64px 0;}
+}
+
+/* ===== セクション共通骨格 ===== */
+.section{
+  padding:120px 0;
+}
+.section-label{
+  font-size:20px;
+  font-weight:500;
+  letter-spacing:-0.5px;
+  margin-bottom:16px;
+}
+.section-rule{
+  width:100%;
+  height:1px;
+  background:var(--line);
+  margin-bottom:64px;
+}
+.section-grid{
+  display:grid;
+  grid-template-columns:40% 1fr;
+  gap:60px;
+}
+.section-grid .col-left{
+  position:sticky;
+  top:120px;
+  align-self:start;
+}
+.col-left h2{
+  font-size:clamp(26px,3.1vw,38px);
+  font-weight:500;
+  line-height:1.35;
+}
+.col-left img{
+  width:100%;
+  margin-top:32px;
+}
+.col-right p{
+  font-size:16px;
+  line-height:1.9;
+  color:var(--gray);
+}
+.col-right > p + .sub-items,
+.col-right .sub-items{
+  margin-top:72px;
+}
+.sub-items{
+  display:flex;
+  flex-direction:column;
+  gap:56px;
+}
+.sub-item h3{
+  font-size:18px;
+  font-weight:700;
+  margin-bottom:16px;
+}
+.sub-item p{
+  font-size:16px;
+  line-height:1.9;
+  color:var(--gray);
+}
+.service-items{
+  display:flex;
+  flex-direction:column;
+  gap:72px;
+}
+.service-item h3{
+  font-size:clamp(24px,3.2vw,36px);
+  font-weight:500;
+  letter-spacing:-0.025em;
+  margin-bottom:20px;
+}
+.service-item p{
+  font-size:16px;
+  line-height:1.9;
+  color:var(--gray);
+}
+
+@media (max-width:768px){
+  .section{padding:64px 0;}
+  .section-grid{
+    grid-template-columns:1fr;
+    gap:40px;
+  }
+  .section-grid .col-left{
+    position:static;
+  }
+}
+
+/* ===== 写真バンド ===== */
+.photo-band{
+  width:100%;
+  height:clamp(280px,42vw,560px);
+  overflow:hidden;
+}
+.photo-band img{
+  width:100%;height:100%;
+  object-fit:cover;
+}
+
+/* ===== Company 定義リスト ===== */
+.dl-list{
+  display:flex;
+  flex-direction:column;
+}
+.dl-row{
+  display:grid;
+  grid-template-columns:200px 1fr;
+  gap:24px;
+  padding:20px 0;
+  border-bottom:1px solid var(--line);
+}
+.dl-row dt{
+  font-size:16px;
+  color:var(--black);
+  font-weight:500;
+}
+.dl-row dd{
+  font-size:16px;
+  line-height:1.9;
+  color:var(--gray);
+}
+@media (max-width:768px){
+  .dl-row{
+    grid-template-columns:1fr;
+    gap:8px;
+  }
+}
+
+/* ===== Contact ===== */
+.contact-links{
+  margin-top:40px;
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.contact-links a{
+  font-size:16px;
+  border-bottom:1px solid var(--line);
+  padding-bottom:2px;
+  display:inline-block;
+  width:fit-content;
+}
+.contact-hours{
+  font-size:13px;
+  color:var(--gray);
+  margin-left:12px;
+  border-bottom:none;
+}
+.contact-cta{
+  margin-top:40px;
+}
+
+/* ===== フッター ===== */
+.site-footer{
+  background:var(--black);
+  color:#fff;
+  padding:96px 0 32px;
+}
+.footer-top{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:48px;
+  padding-bottom:64px;
+}
+.footer-logo{
+  font-size:32px;
+  color:#fff;
+  margin-bottom:24px;
+}
+.footer-address{
+  font-size:14px;
+  line-height:1.9;
+  color:rgba(255,255,255,.65);
+}
+.footer-links{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.footer-links a{
+  font-size:16px;
+}
+.footer-rule{
+  height:1px;
+  background:var(--line-dark);
+  margin-bottom:24px;
+}
+.footer-copy{
+  font-size:13px;
+  color:rgba(255,255,255,.55);
+}
+
+/* ===== フェードイン ===== */
+.fade-in{
+  opacity:0;
+  transform:translateY(20px);
+  transition:opacity .8s ease, transform .8s ease;
+}
+.fade-in.is-visible{
+  opacity:1;
+  transform:translateY(0);
+}
+</style>
+</head>
+<body>
+
+<header class="site-header" id="siteHeader">
+  <button class="header-burger" id="burgerBtn" aria-label="メニューを開く">
+    <span></span><span></span><span></span>
+  </button>
+  <a href="#" class="logo logo-font">SEIKA</a>
+</header>
+
+<div class="menu-overlay" id="menuOverlay">
+  <button class="menu-close" id="menuClose" aria-label="メニューを閉じる">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1"><line x1="4" y1="4" x2="20" y2="20"/><line x1="20" y1="4" x2="4" y2="20"/></svg>
+  </button>
+  <a href="#philosophy">経営方針</a>
+  <a href="#service">サービス案内</a>
+  <a href="#company">会社概要</a>
+  <a href="#contact">お問い合わせ</a>
+</div>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <h1>働く愉しさを、<br>あそび心で創造する。</h1>
+    <div class="hero-links">
+      <a class="link-arrow" href="#philosophy">経営方針<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="13 5 20 12 13 19"/></svg></a>
+      <a class="link-arrow" href="#service">サービス案内<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="13 5 20 12 13 19"/></svg></a>
+      <a class="link-arrow" href="#company">会社概要<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="13 5 20 12 13 19"/></svg></a>
+      <a class="link-arrow" href="#contact">お問い合わせ<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="13 5 20 12 13 19"/></svg></a>
+    </div>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="wrap">
+    <p class="fade-in">株式会社SEIKA consultingは、東京・丸の内を拠点に、ブランディングを通じて企業価値の向上と業績の改革に取り組む会社です。経営者も、そこで働くスタッフも、取引先も、「この会社が好きだ」と誇りを持てる。そういう企業を増やしていくことを目指しています。コンセプトを決めるところから販路をひらくところまで、クライアントと共に創ります。</p>
+  </div>
+</section>
+
+<section class="section" id="philosophy">
+  <div class="wrap">
+    <div class="section-label fade-in">Philosophy</div>
+    <div class="section-rule fade-in"></div>
+    <div class="section-grid">
+      <div class="col-left fade-in">
+        <h2>ブランディングを、<br>スタンダードなものに。</h2>
+      </div>
+      <div class="col-right">
+        <p class="fade-in">仕事も遊びも愉しみ、あそび心を忘れず、人の持つ無限の可能性を信じて、存分に能力を発揮すること。グローバルで活躍できる企業をサポートします。</p>
+        <div class="sub-items">
+          <div class="sub-item fade-in">
+            <h3>戦略性</h3>
+            <p>クライアントのミッション・ビジョンから、市場に則した戦略・戦術を設計します。長期的な変容をもたらすブランディングとマーケティングを実施します。</p>
+          </div>
+          <div class="sub-item fade-in">
+            <h3>全てを愉しむエキスパート</h3>
+            <p>仕事もプライベートも愉しむこと。愉しんでいる人の仕事が、いちばん遠くまで届くと考えています。</p>
+          </div>
+          <div class="sub-item fade-in">
+            <h3>共創Groove</h3>
+            <p>リズムとノリ、そして遊び心を大切にしながら、社会から愛される企業をクライアントと共に創造します。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="service">
+  <div class="wrap">
+    <div class="section-label fade-in">Service</div>
+    <div class="section-rule fade-in"></div>
+    <div class="section-grid">
+      <div class="col-left fade-in">
+        <h2>戦略で決めて、<br>現場でやり切る。</h2>
+      </div>
+      <div class="col-right">
+        <div class="service-items">
+          <div class="service-item fade-in">
+            <h3>事業ブランディング</h3>
+            <p>新規事業立案、新製品開発、既存ブランドのリブランディングを支援します。コンセプトメイキングから、プロジェクトに関わるタスク出しといったPMなども行います。</p>
+          </div>
+          <div class="service-item fade-in">
+            <h3>組織・戦略コンサルティング</h3>
+            <p>組織の構造化や制度づくり、人財スキルの最適化を通じて、組織パフォーマンスの向上を階段式に設計します。目標からのブレをなくし、働く人が安心して活躍できるようアシストします。</p>
+          </div>
+          <div class="service-item fade-in">
+            <h3>コーポレートコーチング</h3>
+            <p>組織として成果をあげるためのコーチングを活用し、メンバー一人ひとりのパフォーマンスを引き上げるサポートをします。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="photo-band fade-in">
+  <img src="img/band-tokyotower.jpg" alt="">
+</div>
+
+<section class="section" id="company">
+  <div class="wrap">
+    <div class="section-label fade-in">Company</div>
+    <div class="section-rule fade-in"></div>
+    <div class="section-grid">
+      <div class="col-left fade-in">
+        <h2>東京・丸の内から。</h2>
+        <img src="img/facade-marunouchi.jpg" alt="">
+      </div>
+      <div class="col-right">
+        <dl class="dl-list fade-in">
+          <div class="dl-row">
+            <dt>会社名</dt>
+            <dd>株式会社SEIKA consulting</dd>
+          </div>
+          <div class="dl-row">
+            <dt>代表者</dt>
+            <dd>八木 秀介</dd>
+          </div>
+          <div class="dl-row">
+            <dt>設立</dt>
+            <dd>2019年12月13日</dd>
+          </div>
+          <div class="dl-row">
+            <dt>所在地</dt>
+            <dd>〒100-0005 東京都千代田区丸の内3丁目2番2号 丸の内二重橋ビル2F</dd>
+          </div>
+          <div class="dl-row">
+            <dt>事業内容</dt>
+            <dd>ブランディング（コンセプトから販路開拓まで）／エグゼクティブコーチング／新規事業開発／東南アジア・EUブランドの輸出入（コスメ・食品）</dd>
+          </div>
+          <div class="dl-row">
+            <dt>営業時間</dt>
+            <dd>9:00〜18:00（土日祝休）</dd>
+          </div>
+          <div class="dl-row">
+            <dt>保有資格</dt>
+            <dd>認定ブランドマネージャー／一般社団法人 日本プロコーチ協会認定エキスパートコーチ／宅地建物取引士／美容師免許</dd>
+          </div>
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contact">
+  <div class="wrap">
+    <div class="section-label fade-in">Contact</div>
+    <div class="section-rule fade-in"></div>
+    <div class="section-grid">
+      <div class="col-left fade-in">
+        <h2>まず、話を<br>聞かせてください。</h2>
+      </div>
+      <div class="col-right">
+        <p class="fade-in">事業のご相談、協業のお話を承っています。内容が固まっていない段階でも構いません。まずは現状をお聞かせください。</p>
+        <div class="contact-links fade-in">
+          <a href="mailto:info@seika-consulting.co.jp">info@seika-consulting.co.jp</a>
+          <a href="tel:0368375455">03-6837-5455<span class="contact-hours">9:00〜18:00（土日祝休）</span></a>
+        </div>
+        <div class="contact-cta fade-in">
+          <a class="link-arrow" href="mailto:info@seika-consulting.co.jp">お問い合わせ<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="4" y1="12" x2="20" y2="12"/><polyline points="13 5 20 12 13 19"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="footer-logo logo-font">SEIKA</div>
+        <div class="footer-address">
+          株式会社SEIKA consulting<br>
+          〒100-0005 東京都千代田区丸の内3丁目2番2号 丸の内二重橋ビル2F<br>
+          info@seika-consulting.co.jp ／ 03-6837-5455
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="#philosophy">経営方針</a>
+        <a href="#service">サービス案内</a>
+        <a href="#company">会社概要</a>
+        <a href="#contact">お問い合わせ</a>
+      </div>
+    </div>
+    <div class="footer-rule"></div>
+    <div class="footer-copy">© 2026 SEIKA consulting Co., Ltd. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var header = document.getElementById('siteHeader');
+  var hero = document.querySelector('.hero');
+  function updateHeader(){
+    var heroHeight = hero.offsetHeight;
+    if(window.scrollY > heroHeight - 80){
+      header.classList.add('is-dark');
+    } else {
+      header.classList.remove('is-dark');
+    }
+  }
+  window.addEventListener('scroll', updateHeader, {passive:true});
+  updateHeader();
+
+  var burgerBtn = document.getElementById('burgerBtn');
+  var menuClose = document.getElementById('menuClose');
+  var menuOverlay = document.getElementById('menuOverlay');
+  function openMenu(){ menuOverlay.classList.add('is-open'); }
+  function closeMenu(){ menuOverlay.classList.remove('is-open'); }
+  burgerBtn.addEventListener('click', openMenu);
+  menuClose.addEventListener('click', closeMenu);
+  menuOverlay.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click', closeMenu);
+  });
+
+  var fadeEls = document.querySelectorAll('.fade-in');
+  var observer = new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {threshold:0});
+  fadeEls.forEach(function(el){ observer.observe(el); });
+})();
+</script>
+
+</body>
+</html>
